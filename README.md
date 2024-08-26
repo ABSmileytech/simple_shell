@@ -1,4 +1,4 @@
- Simple Shell an ALX project by Abraham Tobiloba and Tunde Ibrahim
+ Simple Shell an ALX project by Abraham Tobiloba and Ibrahim Tijani
 
 
 Background Context
