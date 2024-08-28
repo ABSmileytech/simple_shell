@@ -10,25 +10,24 @@
  * @length: Length of the name.
  * Return: 1 if strings are equal, -1 if they are not.
  */
-int str_cmp(char *name, char *variable, unsigned int length)   
-
+int str_cmp(char *name, char *variable, unsigned int length)
 {
-    size_t variable_length;
-    unsigned int i;
-
-    variable_length = strlen(variable);
-
-    if (variable_length != length) {
-        return (-1);
-    }
-
-    for (i = 0; name[i] != '\0' && variable[i] != '\0'; i++) {
-        if (name[i] != variable[i]) {
-            return (1);
-        }
-    }
-
-    return (0);
+	unsigned int var_length;
+	unsigned int i;
+	/* Get the length of the variable string. */
+	var_length = str_len(variable);
+	/* If lengths are not equal, strings can't be the same. */
+	if (var_length != length)
+		return (-1);
+	i = 0;
+	/* Compare characters until a mismatch or end of the strings. */
+	while (name[i] != '\0' && variable[i] != '\0')
+	{
+		if (name[i] != variable[i])
+			return (1); /* Strings are not equal. */
+		i++;
+	}
+	return (0); /* Strings are equal. */
 }
 
 /**
@@ -41,17 +40,20 @@ int str_cmp(char *name, char *variable, unsigned int length)  
  * @length: Length to compare up to.
  * Return: 1 if strings are equal, -1 if they are not.
  */
-int str_ncmp(char *name, char *variable, unsigned int length)   
-
+int str_ncmp(char *name, char *variable, unsigned int length)
 {
-    char *name_end = name + length;
+	unsigned int i;
 
-    while (name != name_end && *name == *variable) {
-        name++;
-        variable++;
-    }
+	i = 0;
 
-    return (*name == *variable) ? 1 : -1;
+	/* Compare characters up to the specified length. */
+	while (i < length)
+	{
+		if (name[i] != variable[i])
+			return (-1); /* Strings are not equal. */
+		i++;
+	}
+	return (1); /* Strings are equal. */
 }
 
 /**
@@ -61,35 +63,27 @@ int str_ncmp(char *name, char *variable, unsigned int length)  
  * @src: String source.
  * Return: The pointer to dest.
  */
-char *str_cpy(char *dest, char *src)   
-
+char *str_cpy(char *dest, char *src)
 {
-    if (dest == NULL || src == NULL) {
-        return (NULL);
-    }
-
-    while (*src != '\0') {
-        *dest++ = *src++;
-    }
-
-    *dest = '\0';
-    return (dest);
+	int i;
+	int j = str_len(src);
+	/* Copy characters from src to dest. */
+	for (i = 0; i <= j; i++)
+		dest[i] = src[i];
+	return (dest);
 }
 
 /**
  * str_len - Returns the length of the input string s. Counts characters until
  * the null terminator is encountered.
  * @s: String to be evaluated.
- * Return: Length of the string.   
-
+ * Return: Length of the string.
  */
-size_t str_len(char *s)
+int str_len(char *s)
 {
-    size_t i = 0;
-
-    while (s[i] != '\0') {
-        i++;
-    }
-
-    return (i);
+	int i = 0;
+	/* Count characters until the null terminator is encountered. */
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
